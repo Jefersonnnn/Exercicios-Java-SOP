@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="SOPThreads:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/SOPThreads_jar</output-path>
-    <root id="archive" name="SOPThreads.jar">
-      <element id="module-output" name="SOPThreads" />
-    </root>
-  </artifact>
-</component>
