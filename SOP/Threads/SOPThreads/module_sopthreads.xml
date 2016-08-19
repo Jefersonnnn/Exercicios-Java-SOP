@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_sopthreads" default="compile.module.sopthreads">
+  <dirname property="module.sopthreads.basedir" file="${ant.file.module_sopthreads}"/>
+  
+  <property name="module.jdk.home.sopthreads" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.sopthreads" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.sopthreads" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.sopthreads" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="sopthreads.output.dir" value="${module.sopthreads.basedir}/out/production/SOPThreads"/>
+  <property name="sopthreads.testoutput.dir" value="${module.sopthreads.basedir}/out/test/SOPThreads"/>
+  
+  <path id="sopthreads.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="sopthreads.module.production.classpath">
+    <path refid="${module.jdk.classpath.sopthreads}"/>
+  </path>
+  
+  <path id="sopthreads.runtime.production.module.classpath">
+    <pathelement location="${sopthreads.output.dir}"/>
+  </path>
+  
+  <path id="sopthreads.module.classpath">
+    <path refid="${module.jdk.classpath.sopthreads}"/>
+    <pathelement location="${sopthreads.output.dir}"/>
+  </path>
+  
+  <path id="sopthreads.runtime.module.classpath">
+    <pathelement location="${sopthreads.testoutput.dir}"/>
+    <pathelement location="${sopthreads.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.sopthreads">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.sopthreads">
+    <patternset refid="excluded.from.module.sopthreads"/>
+  </patternset>
+  
+  <path id="sopthreads.module.sourcepath">
+    <dirset dir="${module.sopthreads.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.sopthreads" depends="compile.module.sopthreads.production,compile.module.sopthreads.tests" description="Compile module SOPThreads"/>
+  
+  <target name="compile.module.sopthreads.production" depends="register.custom.compilers" description="Compile module SOPThreads; production classes">
+    <mkdir dir="${sopthreads.output.dir}"/>
+    <javac2 destdir="${sopthreads.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.sopthreads}/javac">
+      <compilerarg line="${compiler.args.sopthreads}"/>
+      <bootclasspath refid="sopthreads.module.bootclasspath"/>
+      <classpath refid="sopthreads.module.production.classpath"/>
+      <src refid="sopthreads.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.sopthreads"/>
+    </javac2>
+    
+    <copy todir="${sopthreads.output.dir}">
+      <fileset dir="${module.sopthreads.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.sopthreads.tests" depends="register.custom.compilers,compile.module.sopthreads.production" description="compile module SOPThreads; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.sopthreads" description="cleanup module">
+    <delete dir="${sopthreads.output.dir}"/>
+    <delete dir="${sopthreads.testoutput.dir}"/>
+  </target>
+</project>

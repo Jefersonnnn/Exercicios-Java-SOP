@@ -1,0 +1,29 @@
+Aplica‡„o de multiplica‡„o de matrizes
+
+Estrutura do diret¢rio
+
+appmv
+   \bin
+      run.sh   -- roda a aplica‡„o sob linux
+      run.bat  -- roda a aplica‡„o sob windows
+   \src
+      br..\..\..  -- arquivos fontes
+   testfile.txt   -- arquivo com duas enormes matrizes de teste
+   testfile2.txt  -- arquivo com duas pequenas matrizes de teste
+
+utilize o script run apropriado seguido do nome do arquivo de teste
+exemplo
+   bash: ./run.sh testfile.txt
+
+a estrutura do arquivo ‚ a seguinte
+true/false  -- indica se deve utilizar threads ou nao
+m n         -- indica o tamanho da primeira matriz
+(a11) (a12) (a1n)
+..
+(am1) (am2) (amn) -- indicam os valores da matriz 1
+m n
+(a11) (a12) (a1n)
+..
+(am1) (am2) (amn) -- indicam os valores da matriz 2
+
+Se vocˆ n„o especificar o nome do arquivo de teste o programa ira esperar os valores serem digitados no terminal.
